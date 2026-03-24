@@ -43,3 +43,7 @@ models/
 
 # Weights & Biases
 wandb/
+
+# Autoresearch
+run.log
+results.tsv
