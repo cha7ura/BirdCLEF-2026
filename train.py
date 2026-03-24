@@ -11,6 +11,8 @@ model architecture, optimizer, hyperparameters, augmentation, batch size, etc.
 import gc
 import math
 import time
+import multiprocessing
+multiprocessing.set_start_method("fork", force=True)
 
 import timm
 import torch
@@ -133,7 +135,9 @@ else:
 optimizer = torch.optim.AdamW(model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
 
 # LR scheduler
-total_steps_estimate = int(TIME_BUDGET / 2.0)  # rough estimate
+# Estimate total steps: TIME_BUDGET / avg_step_time. ~230ms on MPS, ~80ms on CUDA
+avg_step_ms = 100 if torch.cuda.is_available() else 250
+total_steps_estimate = int(TIME_BUDGET / (avg_step_ms / 1000))
 if SCHEDULER == "cosine":
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=total_steps_estimate)
 else:
