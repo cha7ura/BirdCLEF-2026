@@ -1,0 +1,45 @@
+# Data
+data/
+*.ogg
+*.wav
+*.mp3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Firecrawl
+.firecrawl/
+
+# Kaggle
+*.zip
+
+# Models
+models/
+*.pth
+*.onnx
+*.pkl
+
+# Weights & Biases
+wandb/
